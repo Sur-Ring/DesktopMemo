@@ -17,15 +17,26 @@
    <string>StickyNote</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="spacing">
+    <number>2</number>
+   </property>
+   <property name="leftMargin">
+    <number>4</number>
+   </property>
+   <property name="topMargin">
+    <number>4</number>
+   </property>
+   <property name="rightMargin">
+    <number>4</number>
+   </property>
+   <property name="bottomMargin">
+    <number>4</number>
+   </property>
    <item>
-    <widget class="QLineEdit" name="lineEdit">
-     <property name="text">
-      <string>11111</string>
-     </property>
-    </widget>
+    <widget class="ToolBar::ToolBar" name="tool_bar" native="true"/>
    </item>
    <item>
-    <widget class="Memo" name="plainTextEdit"/>
+    <widget class="Memo" name="memo"/>
    </item>
   </layout>
  </widget>
@@ -34,6 +45,12 @@
    <class>Memo</class>
    <extends>QPlainTextEdit</extends>
    <header>StickyNote/Memo.h</header>
+  </customwidget>
+  <customwidget>
+   <class>ToolBar::ToolBar</class>
+   <extends>QWidget</extends>
+   <header>ToolBar/ToolBar.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources/>

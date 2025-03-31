@@ -28,18 +28,12 @@ set(PROJECT_SOURCES
         StickyNote/Monitor.h
         StickyNote/Elevator.cpp
         StickyNote/Elevator.h
-        TodoList/TodoEntry.cpp
-        TodoList/TodoEntry.h
-        TodoList/TodoEntry.ui
-        TodoList/AddEntry.cpp
-        TodoList/AddEntry.h
-        TodoList/AddEntry.ui
-        TodoList/TodoList.cpp
-        TodoList/TodoList.h
-        TodoList/TodoList.ui
         StickyNote/Memo.cpp
         StickyNote/Memo.h
         StickyNote/Memo.ui
+        ToolBar/ToolBar.cpp
+        ToolBar/ToolBar.h
+        ToolBar/ToolBar.ui
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

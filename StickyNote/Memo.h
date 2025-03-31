@@ -19,12 +19,13 @@ public:
     explicit Memo(QWidget *parent = nullptr);
     ~Memo() override;
     void load_todo();
-    void save_todo();
-    void focusOutEvent(QFocusEvent *e);
+    void focusOutEvent(QFocusEvent *e) override;
+signals:
+    void saved();
 private:
     Ui::Memo *ui;
-private slots:
-    void on_text_changed();
+public slots:
+    void save_todo();
 };
 } // StickyNote
 

@@ -47,6 +47,7 @@ void Memo::save_todo() {
         in << toPlainText();
         file.close();
     }
+    saved();
 }
 
 } // StickyNote
