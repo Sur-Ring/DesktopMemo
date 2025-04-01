@@ -16,8 +16,8 @@ ToolBar::ToolBar(QWidget *parent) :
     ui->setupUi(this);
     saved = true;
     locked = false;
-    connect(ui->lock_btn,SIGNAL(clicked()),this,SLOT(on_lock_clicked()));
-    connect(ui->exit_btn,SIGNAL(clicked()),this,SLOT(on_exit_clicked()));
+    // connect(ui->lock_btn,SIGNAL(clicked()),this,SLOT(on_lock_btn_clicked()));
+    // connect(ui->exit_btn,SIGNAL(clicked()),this,SLOT(on_exit_btn_clicked()));
 }
 
 ToolBar::~ToolBar() {
@@ -36,14 +36,14 @@ void ToolBar::has_changed() {
     ui->save_btn->setIcon(QIcon::fromTheme("mail-message-new"));
 }
 
-void ToolBar::on_save_clicked() {
+void ToolBar::on_save_btn_clicked() {
     if (!saved) {
         // 按到这个按钮本身就会导致失去焦点发生保存, 所以什么都不用做
         // force_save();
     }
 }
 
-void ToolBar::on_lock_clicked() {
+void ToolBar::on_lock_btn_clicked() {
     locked = !locked;
     if (locked) {
         ui->lock_btn->setText("Lock");
@@ -54,7 +54,7 @@ void ToolBar::on_lock_clicked() {
     }
 }
 
-void ToolBar::on_exit_clicked() {
+void ToolBar::on_exit_btn_clicked() {
     qApp->quit();
 }
 } // ToolBar

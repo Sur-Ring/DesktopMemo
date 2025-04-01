@@ -25,11 +25,9 @@ void CALLBACK WinEventProc(
         idChild == CHILDID_SELF &&
         event == EVENT_SYSTEM_FOREGROUND) {
         HWND hWnd = GetForegroundWindow();
-        qDebug() << "front:" << hWnd << " desktop:" << monitor->desktop << "equal:" << (hWnd == monitor->desktop);
+        // qDebug() << "front:" << hWnd << " desktop:" << monitor->desktop << "equal:" << (hWnd == monitor->desktop);
         if (hWnd == monitor->desktop) {
-            qDebug() << "send signal";
             monitor->sendSignal(Monitor::JUMP_TO_DESKTOP);
-            qDebug() << "wait return?";
         }
     }
 }

@@ -8,12 +8,9 @@
 #include <QWidget>
 
 #include <windows.h>
-#include <winuser.h>
 #include "Monitor.h"
 #include "Elevator.h"
 
-#include <windows.h>        //注意头文件
-#include <windowsx.h>
 #include <QMouseEvent>
 #include <QSettings>
 
@@ -27,10 +24,8 @@ Q_OBJECT
 protected:
     void mousePressEvent(QMouseEvent* event) override;
     void mouseMoveEvent(QMouseEvent* event) override;
-    bool nativeEvent(const QByteArray &eventType, void *message, qintptr *result) override;
 private:
     bool inited = false;
-    int boundaryWidth = 4; // 可拖动距离
     QPoint m_dragPosition;  // 用于窗口移动的临时变量
 public:
     explicit StickyNote(QWidget *parent = nullptr);

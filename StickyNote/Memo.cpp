@@ -9,8 +9,8 @@
 
 #include <QFile>
 
-// QString todo_file_path = "Data/todo.txt";
-QString todo_file_path = "D:/Codes/QT/DesktopMemo/Data/todo.txt";
+QString todo_file_path = "./Data/todo.txt";
+// QString todo_file_path = "D:/Codes/QT/DesktopMemo/Data/todo.txt";
 
 namespace StickyNote {
 Memo::Memo(QWidget *parent) :

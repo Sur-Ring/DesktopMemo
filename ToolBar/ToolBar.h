@@ -27,9 +27,9 @@ signals:
 public slots:
     void has_changed();
     void has_saved();
-    void on_save_clicked();
-    void on_lock_clicked();
-    void on_exit_clicked();
+    void on_save_btn_clicked();
+    void on_lock_btn_clicked();
+    void on_exit_btn_clicked();
 };
 } // ToolBar
 

@@ -37,12 +37,13 @@ StickyNote::StickyNote(QWidget *parent) : QWidget(parent), ui(new Ui::StickyNote
     as_toolwindow();
     move_to_top();
 
-    config = new QSettings("D:/Codes/QT/DesktopMemo/Data/cfg.ini", QSettings::IniFormat);
+    config = new QSettings("./Data/cfg.ini", QSettings::IniFormat);
+    // config = new QSettings("D:/Codes/QT/DesktopMemo/Data/cfg.ini", QSettings::IniFormat);
 
     int font_size = config->value("/SN/FontSize", 14).toUInt();
     bool locked = config->value("/SN/Locked", false).toBool();
     ui->tool_bar->locked = !locked;
-    ui->tool_bar->on_lock_clicked();
+    ui->tool_bar->on_lock_btn_clicked();
     QFont ft;
     ft.setPointSize(font_size);
     ui->memo->setFont(ft);
@@ -87,8 +88,8 @@ void StickyNote::move_to_top() {
 
 void StickyNote::as_toolwindow() {
     HWND handle = (HWND) winId();
+    SetWindowLong(handle,GWL_STYLE,GetWindowLong(handle, GWL_STYLE) & ~WS_CAPTION);
     SetWindowLong(handle,GWL_EXSTYLE,WS_EX_TOOLWINDOW);
-    setWindowFlags(Qt::FramelessWindowHint);
 }
 
 void StickyNote::mousePressEvent(QMouseEvent *event) {
@@ -109,37 +110,5 @@ void StickyNote::mouseMoveEvent(QMouseEvent *event) {
         move(event->globalPos() - m_dragPosition);
         event->accept();
     }
-}
-
-bool StickyNote::nativeEvent(const QByteArray &eventType, void *message, qintptr *result) {
-    if (!inited) return false;
-    if (ui->tool_bar->locked) return false;
-    MSG *msg = (MSG *) message;
-    switch (msg->message) {
-        case WM_NCHITTEST:
-            const auto ratio = devicePixelRatioF();
-            int xPos = GET_X_LPARAM(msg->lParam) / ratio - this->frameGeometry().x();
-            int yPos = GET_Y_LPARAM(msg->lParam) / ratio - this->frameGeometry().y();
-            if (xPos < boundaryWidth && yPos < boundaryWidth) //左上角
-                *result = HTTOPLEFT;
-            else if (xPos >= width() - boundaryWidth && yPos < boundaryWidth) //右上角
-                *result = HTTOPRIGHT;
-            else if (xPos < boundaryWidth && yPos >= height() - boundaryWidth) //左下角
-                *result = HTBOTTOMLEFT;
-            else if (xPos >= width() - boundaryWidth && yPos >= height() - boundaryWidth) //右下角
-                *result = HTBOTTOMRIGHT;
-            else if (xPos < boundaryWidth) //左边
-                *result = HTLEFT;
-            else if (xPos >= width() - boundaryWidth) //右边
-                *result = HTRIGHT;
-            else if (yPos < boundaryWidth) //上边
-                *result = HTTOP;
-            else if (yPos >= height() - boundaryWidth) //下边
-                *result = HTBOTTOM;
-            else //其他部分不做处理，返回false，留给其他事件处理器处理
-                return false;
-            return true;
-    }
-    return false; //此处返回false，留给其他事件处理器处理
 }
 } // StickyNote
