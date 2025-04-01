@@ -2,7 +2,9 @@ This program are designed to appear with your desktop. After you pressed the Win
 
 it`s a simple memo but not todo list.
 
-I don\`t know how to use user32 by c#, so I choose QT.
+I don\`t know how to use user32 by c#, so I choose QT
+
+
 
 # 这个项目是什么
 
@@ -20,9 +22,11 @@ I don\`t know how to use user32 by c#, so I choose QT.
 
 并且我只做了一个大的输入框, 因为这是便签而不是todo-list, 我打算分两个项目, 便签做的简单一点, todo-list可以去做每日刷新之类的乱七八糟的功能.
 
-小黄条其实之前也会有这个毛病, 不知道收费版解决没有, 其实挺简单的. 下面列了一下类似的项目, 可以看看, 顺便大家提一点, 咱可以把好的项目整理起来一块儿对比一下.
+它现在长这样:
 
+![QQ截图20250401132551](./assets/QQ截图20250401132551.png)
 
+小黄条其实之前也会有这个Win+D消失毛病, 不知道收费版解决没有, 其实挺简单的, 最后讲. 下面列了一下类似的项目, 可以看看, 顺便大家提一点, 咱可以把好的项目整理起来一块儿对比一下.
 
 # 一些类似的项目可以看看:
 
