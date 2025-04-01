@@ -22,7 +22,7 @@ void Elevator::work() {
         0, 0, 0, 0, // 忽略位置和大小参数
         SWP_NOMOVE | SWP_NOSIZE // 保持当前位置和大小
     );
-    m_pTimer->start(50);
+    m_pTimer->start(topmost_time);
 }
 
 void Elevator::handleTimeout() {

@@ -24,13 +24,16 @@ Q_OBJECT
 protected:
     void mousePressEvent(QMouseEvent* event) override;
     void mouseMoveEvent(QMouseEvent* event) override;
+    bool nativeEvent(const QByteArray &eventType, void *message, qintptr *result) override;
+    void paintEvent(QPaintEvent*event) override;
 private:
     bool inited = false;
+    int boundaryWidth = 4; // 可拖动距离
     QPoint m_dragPosition;  // 用于窗口移动的临时变量
 public:
     explicit StickyNote(QWidget *parent = nullptr);
     ~StickyNote() override;
-    void as_toolwindow();
+    void set_window_style();
     QSettings* config;
 private:
     Ui::StickyNote *ui;

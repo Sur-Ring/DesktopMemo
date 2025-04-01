@@ -24,7 +24,7 @@ I don\`t know how to use user32 by c#, so I choose QT
 
 它现在长这样:
 
-![QQ截图20250401132551](./assets/QQ截图20250401132551.png)
+![外观演示](./assets/外观演示.png)
 
 小黄条其实之前也会有这个Win+D消失毛病, 不知道收费版解决没有, 其实挺简单的, 最后讲. 下面列了一下类似的项目, 可以看看, 顺便大家提一点, 咱可以把好的项目整理起来一块儿对比一下.
 
@@ -36,14 +36,20 @@ https://github.com/li-zheng-hao/StickyNotes
 
 https://github.com/tylhk/StickyNotes
 
+# 配置文件
+
+在运行过一次之后, 所在目录下面会生成一个Data文件夹,里面一个todo.txt保存你当前的数据,而另一个cfg.ini就是配置文件, 你可以改一改字号FontSize, 如果win+D之后窗口没有保持在顶层, 就把TopMost改大一点
+
 # 代码结构指路
 
 StickyNote下的StickyNote为桌面便签窗口,Monitor监听前台窗口变化, 当切换到桌面时发出信号, 随后Elevator负责将窗口移动到顶端, Memo为输入区域, 负责监听输入并保存
 
 ToolBar为顶端工具条
 
-
-
 # 驻留原理概述
 
-我是用winapi搞定的, c#没用明白winapi, 跑了没效果, 本来想试试avalona的, 最后只好用c++写qt. 思路是先hook到EVENT_SYSTEM_FOREGROUND, 用FindWindow("Progman","Program Manager")获取桌面比较一下当前是不是桌面, 然后用SetWindowPos先设为HWND_TOPMOST过一小会儿再设为HWND_NOTOPMOST就好了, 必须要过一小会, 可能是因为Win+D有动画吧. 如果你们的不能在win+D之后保持在桌面上, 可能延长一下这个时间就好了, 之后有空写进配置里吧.
+我是用winapi搞定的, c#没用明白winapi, 跑了没效果, 本来想试试avalona的, 最后只好用c++写qt. 思路是先hook到EVENT_SYSTEM_FOREGROUND, 用FindWindow("Progman","Program Manager")获取桌面比较一下当前是不是桌面, 然后用SetWindowPos先设为HWND_TOPMOST过一小会儿再设为HWND_NOTOPMOST就好了, 必须要过一小会, 可能是因为Win+D有动画吧.
+
+# 怎么开机自启动
+
+按Win+R出来运行窗口, 输入shell:startup并确定, 会打开你的当前用户的启动文件夹, 这个文件夹里的程序会在开机时自动启动, 所以你创建一个快捷方式放进去就好了, 不建议把程序直接放进去谢谢.
