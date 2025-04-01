@@ -36,7 +36,7 @@ https://github.com/li-zheng-hao/StickyNotes
 
 https://github.com/tylhk/StickyNotes
 
-# 代码结构指路400-098-8502
+# 代码结构指路
 
 StickyNote下的StickyNote为桌面便签窗口,Monitor监听前台窗口变化, 当切换到桌面时发出信号, 随后Elevator负责将窗口移动到顶端, Memo为输入区域, 负责监听输入并保存
 
