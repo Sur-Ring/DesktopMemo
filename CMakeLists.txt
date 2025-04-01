@@ -18,9 +18,6 @@ INCLUDE_DIRECTORIES(
 
 set(PROJECT_SOURCES
         main.cpp
-        mainwindow.cpp
-        mainwindow.h
-        mainwindow.ui
         StickyNote/StickyNote.cpp
         StickyNote/StickyNote.h
         StickyNote/StickyNote.ui

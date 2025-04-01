@@ -15,6 +15,7 @@
 #include <windows.h>        //注意头文件
 #include <windowsx.h>
 #include <QMouseEvent>
+#include <QSettings>
 
 namespace StickyNote {
 QT_BEGIN_NAMESPACE
@@ -28,13 +29,14 @@ protected:
     void mouseMoveEvent(QMouseEvent* event) override;
     bool nativeEvent(const QByteArray &eventType, void *message, qintptr *result) override;
 private:
-    bool locked = false;
+    bool inited = false;
     int boundaryWidth = 4; // 可拖动距离
     QPoint m_dragPosition;  // 用于窗口移动的临时变量
 public:
     explicit StickyNote(QWidget *parent = nullptr);
     ~StickyNote() override;
     void as_toolwindow();
+    QSettings* config;
 private:
     Ui::StickyNote *ui;
     HWND hWnd;
@@ -43,8 +45,6 @@ private:
 private slots:
     void move_to_top();
     void checkType(Monitor::Type);
-    void lock();
-    void unlock();
 };
 } // StickyNote
 

@@ -15,6 +15,7 @@ QString todo_file_path = "D:/Codes/QT/DesktopMemo/Data/todo.txt";
 namespace StickyNote {
 Memo::Memo(QWidget *parent) :
     QPlainTextEdit(parent), ui(new Ui::Memo) {
+    qDebug() << "Memo init";
     ui->setupUi(this);
     load_todo();
 }

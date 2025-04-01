@@ -12,10 +12,12 @@
 namespace ToolBar {
 ToolBar::ToolBar(QWidget *parent) :
     QWidget(parent), ui(new Ui::ToolBar) {
+    qDebug() << "ToolBar init";
     ui->setupUi(this);
     saved = true;
     locked = false;
     connect(ui->lock_btn,SIGNAL(clicked()),this,SLOT(on_lock_clicked()));
+    connect(ui->exit_btn,SIGNAL(clicked()),this,SLOT(on_exit_clicked()));
 }
 
 ToolBar::~ToolBar() {
@@ -46,11 +48,13 @@ void ToolBar::on_lock_clicked() {
     if (locked) {
         ui->lock_btn->setText("Lock");
         ui->lock_btn->setIcon(QIcon::fromTheme("media-record"));
-        lock();
     }else {
         ui->lock_btn->setText("No Lock");
         ui->lock_btn->setIcon(QIcon::fromTheme("media-optical"));
-        unlock();
     }
+}
+
+void ToolBar::on_exit_clicked() {
+    qApp->quit();
 }
 } // ToolBar

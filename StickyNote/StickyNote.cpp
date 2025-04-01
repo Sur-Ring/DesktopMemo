@@ -16,10 +16,13 @@
 #include <QMouseEvent>
 #include <windows.h>
 #include <windowsx.h>
+#include <QSettings>
+#include <QFont>
 
 namespace StickyNote {
 StickyNote::StickyNote(QWidget *parent) : QWidget(parent), ui(new Ui::StickyNote), hWnd((HWND) winId()),
                                           elevator(hWnd) {
+    qDebug() << "StickyNote init";
     ui->setupUi(this);
     qDebug() << "StickyNote: hWnd: " << hWnd;
 
@@ -29,18 +32,33 @@ StickyNote::StickyNote(QWidget *parent) : QWidget(parent), ui(new Ui::StickyNote
 
     connect(ui->memo,SIGNAL(saved()), ui->tool_bar,SLOT(has_saved()));
     connect(ui->memo,SIGNAL(textChanged()), ui->tool_bar,SLOT(has_changed()));
-    connect(ui->tool_bar,SIGNAL(force_save()), ui->memo,SLOT(save_todo()));
-
-    connect(ui->tool_bar,SIGNAL(lock()), this,SLOT(lock()));
-    connect(ui->tool_bar,SIGNAL(unlock()), this,SLOT(unlock()));
+    // connect(ui->tool_bar,SIGNAL(force_save()), ui->memo,SLOT(save_todo()));
 
     as_toolwindow();
     move_to_top();
+
+    config = new QSettings("D:/Codes/QT/DesktopMemo/Data/cfg.ini", QSettings::IniFormat);
+
+    int font_size = config->value("/SN/FontSize", 14).toUInt();
+    bool locked = config->value("/SN/Locked", false).toBool();
+    ui->tool_bar->locked = !locked;
+    ui->tool_bar->on_lock_clicked();
+    QFont ft;
+    ft.setPointSize(font_size);
+    ui->memo->setFont(ft);
+
+    restoreGeometry(config->value("/SN/Geometry","300,300,300,300").toByteArray());
+
+    inited = true;
 }
 
 StickyNote::~StickyNote() {
+    config->setValue("/SN/Locked", ui->tool_bar->locked);
+    config->setValue("/SN/Geometry", saveGeometry());
+    delete config;
     delete ui;
     monitor.unInstallHook();
+    qDebug() << "StickyNote exit";
 }
 
 void StickyNote::checkType(Monitor::Type type) {
@@ -61,16 +79,6 @@ void StickyNote::checkType(Monitor::Type type) {
     }
 }
 
-void StickyNote::lock() {
-    locked = true;
-}
-
-
-void StickyNote::unlock() {
-    locked = false;
-}
-
-
 void StickyNote::move_to_top() {
     HWND handle = (HWND) winId();
     qDebug() << "move self: " << handle << " to top";
@@ -84,7 +92,8 @@ void StickyNote::as_toolwindow() {
 }
 
 void StickyNote::mousePressEvent(QMouseEvent *event) {
-    if (locked) return;
+    if (!inited) return;
+    if (ui->tool_bar->locked) return;
     // 当鼠标左键按下时记录鼠标的全局坐标与窗口左上角的坐标差
     if (event->button() == Qt::LeftButton) {
         m_dragPosition = event->pos();
@@ -93,7 +102,8 @@ void StickyNote::mousePressEvent(QMouseEvent *event) {
 }
 
 void StickyNote::mouseMoveEvent(QMouseEvent *event) {
-    if (locked) return;
+    if (!inited) return;
+    if (ui->tool_bar->locked) return;
     // 当鼠标左键被按下时移动窗口
     if (event->buttons() & Qt::LeftButton) {
         move(event->globalPos() - m_dragPosition);
@@ -102,7 +112,8 @@ void StickyNote::mouseMoveEvent(QMouseEvent *event) {
 }
 
 bool StickyNote::nativeEvent(const QByteArray &eventType, void *message, qintptr *result) {
-    if (locked) return false;
+    if (!inited) return false;
+    if (ui->tool_bar->locked) return false;
     MSG *msg = (MSG *) message;
     switch (msg->message) {
         case WM_NCHITTEST:

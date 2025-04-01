@@ -24,14 +24,12 @@ private:
     Ui::ToolBar *ui;
 signals:
     void force_save();
-    void lock();
-    void unlock();
 public slots:
     void has_changed();
     void has_saved();
-private slots:
     void on_save_clicked();
     void on_lock_clicked();
+    void on_exit_clicked();
 };
 } // ToolBar
 

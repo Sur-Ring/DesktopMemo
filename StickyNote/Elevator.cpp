@@ -7,6 +7,7 @@
 
 namespace StickyNote {
 Elevator::Elevator(HWND hWnd) {
+    qDebug() << "Elevator init";
     this->hWnd = hWnd;
     qDebug() << "Elevator: hWnd: " << hWnd;
     m_pTimer = new QTimer(this);

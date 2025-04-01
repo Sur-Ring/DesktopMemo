@@ -37,6 +37,16 @@
     </widget>
    </item>
    <item>
+    <widget class="QPushButton" name="lock_btn">
+     <property name="text">
+      <string>No Lock</string>
+     </property>
+     <property name="icon">
+      <iconset theme="QIcon::ThemeIcon::MediaOptical"/>
+     </property>
+    </widget>
+   </item>
+   <item>
     <spacer name="horizontalSpacer">
      <property name="orientation">
       <enum>Qt::Orientation::Horizontal</enum>
@@ -50,12 +60,12 @@
     </spacer>
    </item>
    <item>
-    <widget class="QPushButton" name="lock_btn">
+    <widget class="QPushButton" name="exit_btn">
      <property name="text">
-      <string>No Lock</string>
+      <string/>
      </property>
      <property name="icon">
-      <iconset theme="QIcon::ThemeIcon::MediaOptical"/>
+      <iconset theme="QIcon::ThemeIcon::ApplicationExit"/>
      </property>
     </widget>
    </item>
