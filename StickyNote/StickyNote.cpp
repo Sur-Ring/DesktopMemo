@@ -101,7 +101,7 @@ void StickyNote::set_window_style() {
 
 void StickyNote::paintEvent(QPaintEvent*event){
     QPainter p(this);
-    p.setBrush(QColor(0, 0, 0, 96));//填充黑色半透明
+    p.setBrush(QColor(48, 48, 48, 96));//填充黑色半透明
     p.drawRect(this->rect());//绘制半透明矩形，覆盖整个窗体
     QWidget::paintEvent(event);
 }
