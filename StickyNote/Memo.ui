@@ -14,7 +14,8 @@
    <string>Memo</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: rgba(0, 0, 0,0);
+   <string notr="true">border: 0px;
+background-color:rgba(0,0,0,0);
 color:rgb(255, 255, 255);</string>
   </property>
   <layout class="QGridLayout" name="gridLayout"/>

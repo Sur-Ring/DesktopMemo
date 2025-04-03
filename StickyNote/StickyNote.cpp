@@ -25,7 +25,6 @@ StickyNote::StickyNote(QWidget *parent) : QWidget(parent), ui(new Ui::StickyNote
                                           elevator(hWnd) {
     qDebug() << "StickyNote init";
     ui->setupUi(this);
-    qDebug() << "StickyNote: hWnd: " << hWnd;
 
     monitor.installHook();
     qRegisterMetaType<Monitor::Type>("Type"); //为了信号中能传递自定义枚举类型，如果传递常规参数，可省略该行
@@ -101,7 +100,7 @@ void StickyNote::set_window_style() {
 
 void StickyNote::paintEvent(QPaintEvent*event){
     QPainter p(this);
-    p.setBrush(QColor(48, 48, 48, 96));//填充黑色半透明
+    p.setBrush(QColor(48, 48, 48, 128));//填充黑色半透明
     p.drawRect(this->rect());//绘制半透明矩形，覆盖整个窗体
     QWidget::paintEvent(event);
 }

@@ -21,6 +21,7 @@ public:
     void sendSignal(Type type);
     Q_ENUM(Type)//注册枚举类型进元对象系统，否则无法将枚举类型作为信号参数传递
     HWND desktop;
+    HWND WorkerW;
 signals:
     void sendKeyType(Type);//发送按键监控信号
 };

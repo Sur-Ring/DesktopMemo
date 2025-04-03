@@ -20,13 +20,19 @@ void CALLBACK WinEventProc(
     DWORD dwEventThread,
     DWORD dwmsEventTime
 ) {
-    if (hwnd &&
-        idObject == OBJID_WINDOW &&
-        idChild == CHILDID_SELF &&
-        event == EVENT_SYSTEM_FOREGROUND) {
+    if (hwnd && idObject == OBJID_WINDOW && idChild == CHILDID_SELF && event == EVENT_SYSTEM_FOREGROUND) {
         HWND hWnd = GetForegroundWindow();
-        // qDebug() << "front:" << hWnd << " desktop:" << monitor->desktop << "equal:" << (hWnd == monitor->desktop);
-        if (hWnd == monitor->desktop) {
+        qDebug() << "hwnd"<< hwnd <<" front:" << hWnd << " desktop:" << monitor->desktop << "WorkerW:" << monitor->WorkerW;
+
+        if (hWnd == monitor->desktop || hWnd == monitor->WorkerW) {
+            monitor->sendSignal(Monitor::JUMP_TO_DESKTOP);
+        }
+
+        TCHAR className[256];
+        int length = GetClassName(hwnd, className, 256);
+        QString aa = QString(className);
+        qDebug() << "className:" << className<<" aa:" << aa<<" equal:"<<(aa == "WorkerW");
+        if (aa == "WorkerW") {
             monitor->sendSignal(Monitor::JUMP_TO_DESKTOP);
         }
     }
@@ -35,6 +41,7 @@ void CALLBACK WinEventProc(
 Monitor::Monitor() {
     qDebug() << "Monitor init";
     desktop = FindWindow(LPCWSTR(QString("Progman").utf16()), LPCWSTR(QString("Program Manager").utf16()));
+    WorkerW = FindWindow(LPCWSTR(QString("WorkerW").utf16()), LPCWSTR(QString("").utf16()));
     qDebug() << "desktop is: " << desktop;
 }
 
